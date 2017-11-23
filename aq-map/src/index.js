@@ -8,26 +8,47 @@ import './index.css'
 
 
 export default class extends Component {
+
+  constructor( props ) {
+    super( props );
+    this.state = {
+      detail_visible:false,
+      map_cell_size:10,
+      detail_cell_size:0
+    };
+
+    this.showDetail = this.showDetail.bind(this);
+  }
+
+  showDetail = () => {
+    const { detail_visible } = this.state;
+    if (detail_visible) {
+      this.setState( { detail_visible : false, map_cell_size:10 } );
+    }
+    else {
+      this.setState( { detail_visible : true, map_cell_size:5, detail_cell_size:5 } );
+    }
+  }
+
   render() {
     return <div>
       <h2>Welcome to AQ Map component</h2>
+      <button onClick={this.showDetail}>Toggle</button>
       <Grid>
         <Cell size={2}>
           <FacetPanel/>
         </Cell>
-        <Cell size={5}>
+        <Cell size={this.state.map_cell_size}>
           <MainMapPanel/>
         </Cell>
-        <Cell size={5}>
-          <SensorDetailPanel/>
-        </Cell>
+        { this.state.detail_visible ? <Cell size={this.state.detail_cell_size}> <SensorDetailPanel/> </Cell> : null }
       </Grid>
     </div>
   }
 
   // Methods
   // toggleFacet
-  // selectSesor
+  // selectSensor - Toggle sizes
 }
 
 
@@ -44,7 +65,13 @@ class FacetPanel extends Component {
 class MainMapPanel extends Component {
   render() {
     return (
-      <div>Main Map Panel</div>
+      <div>
+        <div>Main Map Panel</div>
+      This is sensor detail panel with enough text to cause a wrap around I really hope so I can see if the content pushes to the end of the grid...
+      This is sensor detail panel with enough text to cause a wrap around I really hope so I can see if the content pushes to the end of the grid...
+      This is sensor detail panel with enough text to cause a wrap around I really hope so I can see if the content pushes to the end of the grid...
+      This is sensor detail panel with enough text to cause a wrap around I really hope so I can see if the content pushes to the end of the grid...
+      </div>
     )
   } 
 } 
@@ -53,7 +80,13 @@ class MainMapPanel extends Component {
 class SensorDetailPanel extends Component {
   render() {
     return (
-      <div>Facet Panel</div>
+      <div>
+      <div>Sensor Detail Panel</div>
+      This is sensor detail panel with enough text to cause a wrap around I really hope so I can see if the content pushes to the end of the grid...
+      This is sensor detail panel with enough text to cause a wrap around I really hope so I can see if the content pushes to the end of the grid...
+      This is sensor detail panel with enough text to cause a wrap around I really hope so I can see if the content pushes to the end of the grid...
+      This is sensor detail panel with enough text to cause a wrap around I really hope so I can see if the content pushes to the end of the grid...
+      </div>
     )
   } 
 } 
