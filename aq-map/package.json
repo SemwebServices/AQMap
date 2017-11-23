@@ -21,6 +21,7 @@
     "watch-css": "npm run build-css && npm run build-css --watch --recursive"
   },
   "dependencies": {
+    "node-sass-chokidar": "^0.0.3",
     "react-md": "^1.2.8"
   },
   "peerDependencies": {
