@@ -11,6 +11,7 @@ export default class extends Component {
 
   constructor( props ) {
     super( props );
+
     this.state = {
       detail_visible:false,
       map_cell_size:10,
@@ -23,10 +24,10 @@ export default class extends Component {
   showDetail = () => {
     const { detail_visible } = this.state;
     if (detail_visible) {
-      this.setState( { detail_visible : false, map_cell_size:10 } );
+      this.setState( { detail_visible : false, map_cell_size:10, selectedSensor:0 } );
     }
     else {
-      this.setState( { detail_visible : true, map_cell_size:5, detail_cell_size:5 } );
+      this.setState( { detail_visible : true, map_cell_size:5, detail_cell_size:5, selectedSensor:{id:1} } );
     }
   }
 
@@ -41,7 +42,7 @@ export default class extends Component {
         <Cell size={this.state.map_cell_size}>
           <MainMapPanel/>
         </Cell>
-        { this.state.detail_visible ? <Cell size={this.state.detail_cell_size}> <SensorDetailPanel/> </Cell> : null }
+        { this.state.detail_visible ? <Cell size={this.state.detail_cell_size}> <SensorDetailPanel sensor={this.state.selectedSensor} /> </Cell> : null }
       </Grid>
     </div>
   }
@@ -78,10 +79,15 @@ class MainMapPanel extends Component {
 
 
 class SensorDetailPanel extends Component {
+
+  constructor(props) {
+    super(props)
+  }
+
   render() {
     return (
       <div>
-      <div>Sensor Detail Panel</div>
+      <div>Sensor Detail Panel {this.props.sensor.id}</div>
       This is sensor detail panel with enough text to cause a wrap around I really hope so I can see if the content pushes to the end of the grid...
       This is sensor detail panel with enough text to cause a wrap around I really hope so I can see if the content pushes to the end of the grid...
       This is sensor detail panel with enough text to cause a wrap around I really hope so I can see if the content pushes to the end of the grid...
