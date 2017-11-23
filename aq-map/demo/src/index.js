@@ -1,13 +1,13 @@
 import React, {Component} from 'react'
 import {render} from 'react-dom'
 
-import Example from '../../src/components/aq-map'
+import AQMap from '../../src'
 
 class Demo extends Component {
   render() {
     return <div>
       <h1>aq-map Demo</h1>
-      <Example/>
+      <AQMap/>
     </div>
   }
 }
