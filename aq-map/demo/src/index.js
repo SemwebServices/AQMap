@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import {render} from 'react-dom'
-
 import AQMap from '../../src'
 
 class Demo extends Component {

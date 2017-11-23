@@ -4,6 +4,8 @@ import React, {Component} from 'react'
 // import { NavigationDrawer, Button, FontIcon } from 'react-md';
 import { Grid, Cell } from 'react-md';
 
+import './index.css'
+
 
 export default class extends Component {
   render() {
