@@ -32,10 +32,10 @@ export default class extends Component {
   }
 
   render() {
-    return <div>
+    return <div style={{"flex" :"1", "border":"1px solid red"}}>
       <h2>Welcome to AQ Map component</h2>
       <button onClick={this.showDetail}>Toggle</button>
-      <Grid>
+      <Grid style={{"flex" :"1"}}>
         <Cell size={2}>
           <FacetPanel/>
         </Cell>

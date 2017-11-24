@@ -2,6 +2,14 @@
 
 @include react-md-everything;
 
-body {
+html, body {
   margin: 0;
+  height: 100%;
+  
+}
+
+.fullHeight {
+  border:1px solid black;
+  display: flex;
+  flex-direction: column;
 }
