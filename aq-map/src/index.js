@@ -36,20 +36,20 @@ export default class extends Component {
 
   render() {
     return <div style={{"flex" :"1", "border":"1px solid red"}}>
-      <h2>Welcome to AQ Map component</h2>
-      <button onClick={this.showDetail}>Toggle</button>
-      <Grid style={{"flex" :"1"}}>
-        <Cell size={2}>
-          <FacetPanel/>
-        </Cell>
-        <Cell size={this.state.map_cell_size}>
-          <MainMapPanel  googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-                         loadingElement={<div style={{ height: `100%` }} />}
-                         containerElement={<div style={{ height: `400px` }} />}
-                         mapElement={<div style={{ height: `100%` }} />} />
-        </Cell>
-        { this.state.detail_visible ? <Cell size={this.state.detail_cell_size}> <SensorDetailPanel sensor={this.state.selectedSensor} /> </Cell> : null }
-      </Grid>
+         <h2>Welcome to AQ Map component</h2>
+         <button onClick={this.showDetail}>Toggle</button>
+        <Grid style={{"border":"1px solid orange"}}>
+          <Cell size={2}>
+            <FacetPanel/>
+          </Cell>
+          <Cell style={{"flex":"1", "border":"1px solid yellow"}} size={this.state.map_cell_size}>
+            <MainMapPanel  googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+                           loadingElement={<div style={{ height: '100%' }} />}
+                           containerElement={<div style={{ "flex":"1", "height":"400px" }} />}
+                           mapElement={<div style={{ height: '100%', flex:'1' }} />} />
+          </Cell>
+          { this.state.detail_visible ? <Cell size={this.state.detail_cell_size}> <SensorDetailPanel sensor={this.state.selectedSensor} /> </Cell> : null }
+        </Grid>
     </div>
   }
 
@@ -97,7 +97,7 @@ class SensorDetailPanel extends Component {
   render() {
     return (
       <div>
-      <div>Sensor Detail Panel {this.props.sensor.id}</div>
+      <div>Sensor Detail Panel {this.props.sensor ? this.props.sensor.id : ''}</div>
       This is sensor detail panel with enough text to cause a wrap around I really hope so I can see if the content pushes to the end of the grid...
       This is sensor detail panel with enough text to cause a wrap around I really hope so I can see if the content pushes to the end of the grid...
       This is sensor detail panel with enough text to cause a wrap around I really hope so I can see if the content pushes to the end of the grid...
