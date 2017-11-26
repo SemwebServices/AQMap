@@ -35,16 +35,16 @@ export default class extends Component {
   }
 
   render() {
-    return <div style={{"flex" :"1", "border":"1px solid red"}}>
+    return <div style={{"flex" :"1"}} >
          <h2>Welcome to AQ Map component</h2>
          <button onClick={this.showDetail}>Toggle</button>
-        <Grid style={{"border":"1px solid orange", "height":"100%"}}>
+        <Grid style={{"height":"100%"}}>
           <Cell size={2}>
             <FacetPanel/>
           </Cell>
           <Cell size={this.state.map_cell_size}>
             <MainMapPanel  googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-                           loadingElement={<div style={{ height: '100%' }} />}
+                           loadingElement={<div style={{ }} />}
                            containerElement={<div style={{ "flex":"1", "height":"100%" }} />}
                            mapElement={<div style={{ height: '100%', flex:'1' }} />} />
           </Cell>
