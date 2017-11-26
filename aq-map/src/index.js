@@ -38,14 +38,14 @@ export default class extends Component {
     return <div style={{"flex" :"1", "border":"1px solid red"}}>
          <h2>Welcome to AQ Map component</h2>
          <button onClick={this.showDetail}>Toggle</button>
-        <Grid style={{"border":"1px solid orange"}}>
+        <Grid style={{"border":"1px solid orange", "height":"100%"}}>
           <Cell size={2}>
             <FacetPanel/>
           </Cell>
-          <Cell style={{"flex":"1", "border":"1px solid yellow"}} size={this.state.map_cell_size}>
+          <Cell size={this.state.map_cell_size}>
             <MainMapPanel  googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
                            loadingElement={<div style={{ height: '100%' }} />}
-                           containerElement={<div style={{ "flex":"1", "height":"400px" }} />}
+                           containerElement={<div style={{ "flex":"1", "height":"100%" }} />}
                            mapElement={<div style={{ height: '100%', flex:'1' }} />} />
           </Cell>
           { this.state.detail_visible ? <Cell size={this.state.detail_cell_size}> <SensorDetailPanel sensor={this.state.selectedSensor} /> </Cell> : null }
