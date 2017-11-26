@@ -1,30 +1,25 @@
 import React, {Component} from 'react'
-
 // https://react-md.mlaursen.com/getting-started/installation
 // import { NavigationDrawer, Button, FontIcon } from 'react-md';
 import { Grid, Cell } from 'react-md';
-
 import './index.css'
-
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
+import axios from 'axios';
 
 //
 // Some sparql examples here
 // https://github.com/BetterWithDataSociety/OpenDataKiosk/blob/dev/AirMap2/partial/AirMap2/AirMap2.js
 //
-//  
-//  $http.get("http://apps.opensheffield.org/sparql?default-graph-uri=&query=select+%3Fs+%3Flat+%3Flon+%3Fid+where+%7B%0D%0A++%3Fs+a+%3Chttp%3A%2F%2Fpurl.oclc.org%2FNET%2Fssnx%2Fssn%23SensingDevice%3E+.%0D%0A++%3Fs+%3Chttp%3A%2F%2Fwww.w3.org%2F2003%2F01%2Fgeo%2Fwgs84_pos%23lat%3E+%3Flat+.%0D%0A++%3Fs+%3Chttp%3A%2F%2Fwww.w3.org%2F2003%2F01%2Fgeo%2Fwgs84_pos%23long%3E+%3Flon+.%0D%0A++%3Fs+%3Curi%3A%2F%2Fopensheffield.org%2Fproperties%23sensorId%3E+%3Fid+.%0D%0A++FILTER%28NOT+EXISTS+%7B+%3Fs+a+%3Curi%3A%2F%2Fopensheffield.org%2Ftypes%23diffusionTube%3E+%7D+%29%0D%0A%7D%0D%0A&format=application%2Fsparql-results%2Bjson&timeout=0&debug=on").success( function(data) {
-//            for ( var i = 0; i < data.results.bindings.length; i++ ) {
-//                    var p = new ol.geom.Point(ol.proj.transform([parseFloat(data.results.bindings[i].lon.value), 
-//                                                                         parseFloat(data.results.bindings[i].lat.value)], 'EPSG:4326', 'EPSG:900913'));
+// for ( var i = 0; i < data.results.bindings.length; i++ ) {
+//   var p = new ol.geom.Point(ol.proj.transform([parseFloat(data.results.bindings[i].lon.value), 
+//   parseFloat(data.results.bindings[i].lat.value)], 'EPSG:4326', 'EPSG:900913'));
 //
-//                                                                                 var f = new ol.Feature({geometry:p,
-//                                                                                                                 type : 'RTMonitoring',
-//                                                                                                                                                 uri : data.results.bindings[i].s.value,
-//                                                                                                                                                                                 label : data.results.bindings[i].id.value});
-//                                                                                                                                                                                         
-//                                                                                                                                                                                                 f.setStyle(rtStyle);
-//                                                                                                                                                                                                         mkrs.addFeatures([f]);
+//   var f = new ol.Feature({geometry:p,
+//   type : 'RTMonitoring',
+//   uri : data.results.bindings[i].s.value,
+//   label : data.results.bindings[i].id.value});
+//   f.setStyle(rtStyle);
+//   mkrs.addFeatures([f]);
 //  }
 
 
@@ -40,6 +35,15 @@ export default class extends Component {
     };
 
     this.showDetail = this.showDetail.bind(this);
+  }
+
+  componentDidMount() {
+    axios.get('http://demo.semweb.co/sparql?default-graph-uri=&query=select+%3Fs+%3Flat+%3Flon+%3Fid+where+%7B%0D%0A++%3Fs+a+%3Chttp%3A%2F%2Fpurl.oclc.org%2FNET%2Fssnx%2Fssn%23SensingDevice%3E+.%0D%0A++%3Fs+%3Chttp%3A%2F%2Fwww.w3.org%2F2003%2F01%2Fgeo%2Fwgs84_pos%23lat%3E+%3Flat+.%0D%0A++%3Fs+%3Chttp%3A%2F%2Fwww.w3.org%2F2003%2F01%2Fgeo%2Fwgs84_pos%23long%3E+%3Flon+.%0D%0A++%3Fs+%3Curi%3A%2F%2Fopensheffield.org%2Fproperties%23sensorId%3E+%3Fid+.%0D%0A++FILTER%28NOT+EXISTS+%7B+%3Fs+a+%3Curi%3A%2F%2Fopensheffield.org%2Ftypes%23diffusionTube%3E+%7D+%29%0D%0A%7D%0D%0A&format=application%2Fsparql-results%2Bjson&timeout=0&debug=on')
+      .then(res => {
+        console.log("Got dat %o",res);
+        // const posts = res.data.data.children.map(obj => obj.data);
+        // this.setState({ posts });
+      });
   }
 
   showDetail = () => {

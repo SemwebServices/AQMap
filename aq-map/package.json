@@ -21,6 +21,7 @@
     "watch-css": "npm run build-css && npm run build-css --watch --recursive"
   },
   "dependencies": {
+    "axios": "^0.17.1",
     "node-sass-chokidar": "^0.0.3",
     "react-google-maps": "^9.3.0",
     "react-md": "^1.2.8"
