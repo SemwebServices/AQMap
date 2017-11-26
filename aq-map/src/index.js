@@ -32,6 +32,7 @@ export default class extends Component {
     else {
       this.setState( { detail_visible : true, map_cell_size:5, detail_cell_size:5, selectedSensor:{id:1} } );
     }
+    //google.maps.event.trigger(map, "resize");
   }
 
   render() {
@@ -44,7 +45,7 @@ export default class extends Component {
           <Cell size={this.state.map_cell_size}>
             <MainMapPanel  googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
                            loadingElement={<div style={{ }} />}
-                           containerElement={<div style={{ "flex":"1", "height":"99%" }} />}
+                           containerElement={<div style={{ "flex":"1", "height":"95%" }} />}
                            mapElement={<div style={{ height: '100%', flex:'1' }} />} />
           </Cell>
           { this.state.detail_visible ? <Cell size={this.state.detail_cell_size}> <SensorDetailPanel sensor={this.state.selectedSensor} /> </Cell> : null }

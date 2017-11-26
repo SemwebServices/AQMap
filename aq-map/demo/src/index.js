@@ -5,7 +5,7 @@ import './index.css'
 
 class Demo extends Component {
   render() {
-    return <div style={{"display":"flex", "flex-direction":"column", "height":"100%"}}>
+    return <div style={{"display":"flex", "flexDirection":"column", "height":"100%"}}>
       <h1>aq-map Demo</h1>
       <AQMap style={{"flex":"1"}}/>
     </div>
