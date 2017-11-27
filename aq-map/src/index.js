@@ -4,6 +4,7 @@ import React, {Component} from 'react'
 import { Grid, Cell } from 'react-md';
 import './index.css'
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
+import MarkerClusterer from "react-google-maps/lib/components/addons/MarkerClusterer";
 import axios from 'axios';
 
 //
@@ -105,10 +106,12 @@ class FacetPanel extends Component {
 
 // See https://tomchentw.github.io/react-google-maps/#googlemap
 const MainMapPanel = withScriptjs(withGoogleMap((props) =>
-  <GoogleMap defaultZoom={8} defaultCenter={{ lat: -34.397, lng: 150.644 }} >
-    { props.sensors.data.results.bindings.map ( sensor => (
-      <Marker key={sensor.id.value} position={{ lat:parseFloat(sensor.lat.value), lng:parseFloat(sensor.lon.value)}}/>
-    ) ) }
+  <GoogleMap defaultZoom={8} defaultCenter={{ lat: 53.3811, lng:1.4701 }} >
+    <MarkerClusterer averageCenter enableRetinaIcons gridSize={60} >
+      { props.sensors.data.results.bindings.map ( sensor => (
+        <Marker key={sensor.id.value} position={{ lat:parseFloat(sensor.lat.value), lng:parseFloat(sensor.lon.value)}}/>
+      ) ) }
+    </MarkerClusterer>
   </GoogleMap>
 ))
 
