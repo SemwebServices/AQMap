@@ -57,8 +57,9 @@ export default class extends Component {
     //google.maps.event.trigger(map, "resize");
   }
 
-  selectSensor = () => {
-    alert('select sensor');
+  selectSensor = (markerClusterer) => {
+    console.log("%o",markerClusterer);
+    this.setState( { detail_visible : true, map_cell_size:5, detail_cell_size:5 } );
   }
 
   render() {
