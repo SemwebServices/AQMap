@@ -30,9 +30,9 @@ export default class extends Component {
     super( props );
 
     this.state = {
-      detail_visible:false,
-      map_cell_size:10,
-      detail_cell_size:0
+      detail_visible:true,
+      map_cell_size:5,
+      detail_cell_size:5
     };
 
     this.showDetail = this.showDetail.bind(this);
@@ -64,7 +64,7 @@ export default class extends Component {
 
   render() {
     return <div style={{"flex" :"1"}} >
-        <Grid style={{"height":"100%"}}>
+        <Grid style={{"height":"95%"}}>
           <Cell size={2}>
             <FacetPanel/>
             <button onClick={this.showDetail}>Toggle</button>
@@ -73,11 +73,11 @@ export default class extends Component {
             <MainMapPanel  googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
                            loadingElement={<div style={{ }} />}
                            containerElement={<div style={{ "flex":"1", "height":"95%" }} />}
-                           mapElement={<div style={{ height: '100%', flex:'1' }} />} 
+                           mapElement={<div style={{ height: '95%', flex:'1' }} />} 
 		           sensors={this.state.sensorData} 
 		           onClusterClick={this.selectSensor} />
           </Cell>
-          { this.state.detail_visible ? <Cell size={this.state.detail_cell_size}> <SensorDetailPanel sensor={this.state.selectedSensor} /> </Cell> : null }
+          { this.state.detail_visible ? <Cell size={this.state.detail_cell_size}> <SensorDetailPanel mode="none" /> </Cell> : null }
         </Grid>
         &nbsp; <br/>
     </div>
@@ -102,33 +102,14 @@ class FacetPanel extends Component {
 
 // See https://tomchentw.github.io/react-google-maps/#googlemap
 const MainMapPanel = withScriptjs(withGoogleMap((props) =>
-  <GoogleMap defaultZoom={8} defaultCenter={{ lat: 53.3811, lng:1.4701 }} >
-    <MarkerClusterer averageCenter enableRetinaIcons gridSize={60} onClick={props.onClusterClick}>
+  <GoogleMap defaultZoom={10} defaultCenter={{ lat: 53.3811, lng:-1.4701 }} >
+    <MarkerClusterer averageCenter enableRetinaIcons gridSize={60} onClick={props.onClusterClick} defaultZoomOnClick={false} >
       { props.sensors.data.results.bindings.map ( sensor => (
         <Marker key={sensor.id.value} position={{ lat:parseFloat(sensor.lat.value), lng:parseFloat(sensor.lon.value)}}/>
       ) ) }
     </MarkerClusterer>
   </GoogleMap>
 ))
-
-class MainMapPanel2 extends Component {
-
-  constructor( props ) {
-    super( props );
-    
-  }
-
-  render() {
-    return (
-      <GoogleMap defaultZoom={8} defaultCenter={{ lat: -34.397, lng: 150.644 }} >
-        { props.sensors.data.results.bindings.map ( sensor => (
-          <Marker key={sensor.id.value} position={{ lat:parseFloat(sensor.lat.value), lng:parseFloat(sensor.lon.value)}}/>
-        ) ) }
-      </GoogleMap>
-    )
-  } 
-} 
-
 
 class SensorDetailPanel extends Component {
 
@@ -137,15 +118,23 @@ class SensorDetailPanel extends Component {
   }
 
   render() {
-    return (
-      <div>
-      <div>Sensor Detail Panel {this.props.sensor ? this.props.sensor.id : ''}</div>
-      This is sensor detail panel with enough text to cause a wrap around I really hope so I can see if the content pushes to the end of the grid...
-      This is sensor detail panel with enough text to cause a wrap around I really hope so I can see if the content pushes to the end of the grid...
-      This is sensor detail panel with enough text to cause a wrap around I really hope so I can see if the content pushes to the end of the grid...
-      This is sensor detail panel with enough text to cause a wrap around I really hope so I can see if the content pushes to the end of the grid...
-      </div>
-    )
+    let result = null;
+
+    switch ( this.props.mode ) {
+      case 'sensorDetail':
+        break;
+      case 'clusterSelect':
+        break;
+      default:
+        result = (
+          <div>
+            <p>Select a sensor</p>
+          </div>
+        )
+        break;
+    }
+
+    return result;
   } 
 } 
 
